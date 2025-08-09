@@ -18,7 +18,8 @@ function ForgotPassword() {
       <div className="m-auto flex w-[90%] max-w-6xl h-[90%] shadow-lg rounded-xl overflow-hidden bg-white">
 
         {/* Left: Form */}
-        <div className="w-1/2 flex flex-col justify-center px-10">
+       <div className="w-full md:w-1/2 p-6 sm:p-10">
+
          <div className="mb-8">
                     <img src={logo} alt="Logo" className="h-21 w-40" />
                   </div>
@@ -61,7 +62,8 @@ function ForgotPassword() {
         </div>
 
         {/* Right: Side Image */}
-        <div className="w-1/2 flex items-center justify-center bg-white">
+       <div className="hidden md:flex w-full md:w-1/2 items-center justify-center bg-white">
+
           <img
             src={sideImageForgot}
             alt="Side"

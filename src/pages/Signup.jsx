@@ -6,10 +6,11 @@ import logo from '../assets/logo.jpg';
 function Signup() {
   return (
     <div className="flex h-screen bg-gray-100">
-    
+
       <div className="m-auto flex w-[90%] max-w-6xl h-[90%] shadow-lg rounded-xl overflow-hidden bg-white">
 
-        <div className="w-1/2 flex items-center justify-center bg-white">
+        <div className="hidden md:flex w-full md:w-1/2 items-center justify-center bg-white">
+
           <img
             src={sideImageSignup}
             alt="Side"
@@ -17,18 +18,19 @@ function Signup() {
           />
         </div>
 
-        <div className="w-1/2 flex items-center justify-center px-8">
+        <div className="w-full md:w-1/2 flex items-center justify-center px-4 md:px-8">
+
           <div className="w-full max-w-md">
-          <div className="mb-8">
-                      <img src={logo} alt="Logo" className="h-21 w-40" />
-                    </div>
+            <div className="mb-8">
+              <img src={logo} alt="Logo" className="h-21 w-40" />
+            </div>
             <h2 className="text-3xl font-bold text-gray-800 mb-2">Sign up</h2>
             <p className="text-gray-500 mb-6 text-sm">
               Let’s get you all set up so you can access your personal account.
             </p>
 
             <form className="space-y-4">
-              
+
               <div className="flex space-x-4">
                 <input
                   type="text"
@@ -42,7 +44,7 @@ function Signup() {
                 />
               </div>
 
-              
+
               <div className="flex space-x-4">
                 <input
                   type="email"
@@ -56,7 +58,7 @@ function Signup() {
                 />
               </div>
 
-              
+
               <div className="flex space-x-4">
                 <input
                   type="password"
@@ -97,18 +99,19 @@ function Signup() {
             <div className="my-6 text-center text-gray-400">Or sign up with</div>
 
             <div className="flex justify-center space-x-4">
-  <button onClick={() => alert("Facebook login not implemented yet")}>
-    <img src="/icons/facebook.png" alt="Facebook" className="h-10 w-[88px] border-b-2 border-blue-500" />
-  </button>
-  <button onClick={() => alert("Google login not implemented yet")}>
-    <img src="/icons/google.png" alt="Google" className="h-10 w-[88px] border-b-2 border-blue-500" />
-  </button>
-  <button onClick={() => alert("Apple login not implemented yet")}>
-    <img src="/icons/apple.png" alt="Apple" className="h-10 w-[88px] border-b-2 border-blue-500" />
-  </button>
-</div>
+              <button onClick={() => alert("Facebook login not implemented yet")}>
+                <img src="/icons/facebook.png" alt="Facebook" className="h-10 w-[88px] border-b-2 border-blue-500" />
+              </button>
+              <button onClick={() => alert("Google login not implemented yet")}>
+                <img src="/icons/google.png" alt="Google" className="h-10 w-[88px] border-b-2 border-blue-500" />
+              </button>
+              <button onClick={() => alert("Apple login not implemented yet")}>
+                <img src="/icons/apple.png" alt="Apple" className="h-10 w-[88px] border-b-2 border-blue-500" />
+              </button>
+            </div>
 
           </div>
+
         </div>
 
       </div>

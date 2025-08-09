@@ -4,7 +4,8 @@ function Dashboard() {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md p-6">
+      <div className="hidden md:block w-64 bg-white shadow-md p-6">
+
         <h2 className="text-2xl font-bold mb-8 text-blue-600">MyApp</h2>
         <ul className="space-y-4 text-gray-700">
           <li className="hover:text-blue-500 cursor-pointer">Home</li>

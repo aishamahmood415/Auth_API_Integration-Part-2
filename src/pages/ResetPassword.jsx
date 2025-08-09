@@ -22,18 +22,17 @@ const ResetPassword = () => {
       return;
     }
 
-    // Simulate success (replace this with API call if needed)
     alert("Password set successfully!");
 
-    // Redirect to login after success
     navigate("/login");
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="bg-white flex flex-col md:flex-row w-full max-w-5xl rounded-2xl shadow-lg overflow-hidden">
-        {/* Left Side – Form */}
-        <div className="w-full md:w-1/2 p-10">
+      
+  <div className="w-full md:w-1/2 p-6 sm:p-10">
+
          <div className="mb-8">
                     <img src={logo} alt="Logo" className="h-21 w-40" />
                   </div>
@@ -74,8 +73,8 @@ const ResetPassword = () => {
           </form>
         </div>
 
-        {/* Right Side – Image */}
-        <div className="w-1/2 hidden md:flex items-center justify-center bg-white">
+        <div className="hidden md:flex w-full md:w-1/2 items-center justify-center bg-white">
+
           <img src={sideImage} alt="Side Illustration" className="w-[80%] h-auto object-contain" />
         </div>
       </div>
