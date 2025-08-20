@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import logo from '../assets/logo.jpg';
 import sideImage from '../assets/side-image.png';
 
@@ -18,21 +17,26 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'https://os-project-server.vercel.app/auth/existinguser',
+        "https://os-project-server.vercel.app/auth/existinguser",
         { username, password }
       );
 
+      // ✅ Actual token save karo
       const token = response.data.token;
       localStorage.setItem("authToken", token);
 
-      // Decode token
-      const userData = jwtDecode(token);
-      localStorage.setItem("userData", JSON.stringify(userData));
+      // ✅ Agar backend sirf username deta hai to usko store karo
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ username })
+      );
 
+      // ✅ Navigate to Welcome
       navigate("/welcome");
+
     } catch (error) {
       alert("Login failed. Check username/password.");
-      console.error(error);
+      console.error("Login Error:", error);
     } finally {
       setLoading(false);
     }
@@ -113,7 +117,7 @@ const Login = () => {
         </div>
 
         {/* Right Image Section */}
-        <div className="hidden md:flex w-full md:w-1/2 items-center justify-center bg-white">
+        <div className="hidden md:flex w-full md:w-1/2 items-center justify-center bg-blue-100">
           <img src={sideImage} alt="Side Illustration" className="w-[80%] h-auto object-contain" />
         </div>
       </div>

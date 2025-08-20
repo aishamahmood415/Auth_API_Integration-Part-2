@@ -1,79 +1,86 @@
 import React, { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { User } from "lucide-react"; // 👈 user icon add
 
 const Welcome = () => {
-  const [decoded, setDecoded] = useState(null);
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+    const token = localStorage.getItem("authToken");
+    const storedUser = localStorage.getItem("userData");
 
-    try {
-      const decodedToken = jwtDecode(token);
-      setDecoded(decodedToken);
-    } catch (error) {
-      console.error("Invalid token", error);
+    if (!token) {
+      navigate("/login");
+      return;
     }
-  }, []);
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser.username) {
+        setUsername(parsedUser.username);
+
+        // Email laane ke liye API call
+        axios
+          .get("https://os-project-server.vercel.app/auth/users")
+          .then((res) => {
+            const foundUser = res.data.find(
+              (u) => u.username === parsedUser.username
+            );
+            if (foundUser) {
+              setEmail(foundUser.email);
+            }
+          })
+          .catch((err) => console.error("Error fetching users:", err));
+      }
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userData");
+    navigate("/login");
+  };
 
   return (
-    <div className="welcome-container">
-      <div className="welcome-card">
-        {decoded ? (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100">
+      <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg text-center transition transform hover:scale-[1.01]">
+        {/* Profile Avatar */}
+        <div className="flex justify-center mb-4">
+          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-100 shadow-sm">
+            <User className="w-8 h-8 text-blue-600" />
+          </div>
+        </div>
+
+        {/* Heading */}
+        <h1 className="text-3xl font-bold text-blue-600 mb-4">Welcome 🎉</h1>
+
+        {/* User Info */}
+        {username ? (
           <>
-            <h1>Welcome, {decoded.username || "User"}!</h1>
-            <p>Email: {decoded.email || "Not provided"}</p>
-            <div className="decoded-info">
-              <p><strong>User ID:</strong> {decoded.userId}</p>
-              <p><strong>Issued At:</strong> {decoded.iat}</p>
-              <p><strong>Expires At:</strong> {decoded.exp}</p>
-            </div>
+            <p className="text-lg text-gray-700 mb-2">
+              Hello, <span className="font-semibold">{username}</span> 👋
+            </p>
+            {email && (
+              <p className="text-md text-gray-500">
+                Your email: <span className="font-medium">{email}</span>
+              </p>
+            )}
           </>
         ) : (
-          <p>No token found. Please login.</p>
+          <p className="text-gray-600">Loading user info...</p>
         )}
-      </div>
 
-      {/* CSS */}
-      <style>{`
-        .welcome-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 20px;
-        }
-        .welcome-card {
-          background: white;
-          max-width: 500px;
-          width: 100%;
-          border-radius: 10px;
-          box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-          padding: 20px;
-          text-align: center;
-        }
-        .welcome-card h1 {
-          margin-bottom: 10px;
-          color: #333;
-        }
-        .welcome-card p {
-          margin: 5px 0;
-          color: #555;
-          word-break: break-word;
-        }
-        .decoded-info {
-          margin-top: 20px;
-          padding-top: 10px;
-          border-top: 1px solid #ddd;
-        }
-        @media (max-width: 600px) {
-          .welcome-card {
-            padding: 15px;
-          }
-          .welcome-card h1 {
-            font-size: 1.5rem;
-          }
-        }
-      `}</style>
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="w-full mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition"
+        >
+          Sign out
+        </button>
+      </div>
     </div>
   );
 };
