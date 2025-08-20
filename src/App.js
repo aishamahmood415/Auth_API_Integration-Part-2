@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -18,6 +18,8 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/welcome" element={<Welcome />} />
 
+        {/* 👇 Default Route - very important */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );
