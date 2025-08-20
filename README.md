@@ -7,15 +7,15 @@ Deployed with **Vercel** and connected with an **external authentication API**.
 
 ## Live Demo
 
-- **Vercel Deployment Link:** [Your Vercel Link Here]  
-- **GitHub Repository:** [Your Repo Link Here]  
+- **Vercel Deployment Link:** auth-api-integration-part-2-updated.vercel.app  
+- **GitHub Repository:** (https://github.com/aishamahmood415/Auth_API_Integration-Part-2.git)
 
 ## Setup Instructions
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/aishamahmood415/Auth_API_Integration-Part-2.git
+   cd Auth_API_Integration-Part-2
 ````
 
 2. Install dependencies:
